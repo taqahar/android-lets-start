@@ -1,12 +1,6 @@
 <resources>
     <string name="app_name">Dev Mobile 1</string>
     <string name="action_settings">Settings</string>
-    <!--  My Strings  -->
-    <string name="label_a">Saisir A</string>
-    <string name="label_n">Saisir n</string>
-    <string name="label_resultat">RESULTAT</string>
-    <string name="label_btn_calculer">RESULTAT</string>
-    <string name="label_btn_annuler">EFFACER</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
@@ -24,5 +18,11 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <!--  My Strings  -->
     <string name="label_info">Calculons A^n</string>
+    <string name="label_a">Saisir A</string>
+    <string name="label_n">Saisir n</string>
+    <string name="label_resultat">RESULTAT</string>
+    <string name="label_btn_calculer">CALCULER</string>
+    <string name="label_btn_annuler">EFFACER</string>
 </resources>
