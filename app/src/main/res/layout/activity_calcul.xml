@@ -9,20 +9,36 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:focusable="true"
-        android:focusableInTouchMode="true">
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="36sp"
-            android:layout_marginVertical="18sp"
-            android:background="@color/design_default_color_primary"
-            android:gravity="center"
-            android:text="@string/label_info"
-            android:textColor="@color/white"
-            android:textSize="24sp" />
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btn_return"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_retour"
+                android:layout_marginHorizontal="18sp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="18sp"
+                android:layout_marginVertical="18sp"
+                android:background="@color/design_default_color_primary"
+                android:gravity="center"
+                android:text="@string/label_info"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,8 +53,8 @@
                 android:layout_marginHorizontal="20dp"
                 android:gravity="center"
                 android:hint="@string/label_a"
-                android:inputType="number"
-                android:importantForAutofill="no" />
+                android:importantForAutofill="no"
+                android:inputType="number" />
 
         </LinearLayout>
 
@@ -53,10 +69,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
+
                 android:gravity="center"
                 android:hint="@string/label_n"
-                android:inputType="number"
-                android:importantForAutofill="no"/>
+                android:importantForAutofill="no"
+                android:inputType="number" />
 
         </LinearLayout>
 
@@ -83,26 +100,26 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="bottom"
-            android:padding="18dp"
-            android:orientation="vertical">
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="18dp">
 
             <Button
                 android:id="@+id/btn_calculer"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginHorizontal="32dp"
+                android:layout_marginHorizontal="8dp"
                 android:text="@string/label_btn_calculer"
-                android:textSize="28sp" />
+                android:textSize="24sp" />
 
             <Button
                 android:id="@+id/btn_annuler"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="32dp"
+                android:layout_marginHorizontal="8dp"
+                android:backgroundTint="@color/design_default_color_error"
                 android:text="@string/label_btn_annuler"
-                android:textSize="28sp" />
+                android:textSize="24sp" />
 
         </LinearLayout>
     </LinearLayout>

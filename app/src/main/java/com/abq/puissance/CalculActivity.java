@@ -14,6 +14,7 @@ import android.widget.TextView;
 public class CalculActivity extends AppCompatActivity {
     Button btCalculer;
     Button btAnnuler;
+    Button btnReturn;
     EditText editA;
     EditText editN;
     TextView txtResultat;
@@ -24,32 +25,27 @@ public class CalculActivity extends AppCompatActivity {
         setContentView(R.layout.activity_calcul);
         btCalculer = findViewById(R.id.btn_calculer);
         btAnnuler = findViewById(R.id.btn_annuler);
+        btnReturn = findViewById(R.id.btn_return);
         editA = findViewById(R.id.nombre_a);
         editN = findViewById(R.id.nombre_n);
         txtResultat = findViewById(R.id.nombre_apn);
 
-        btCalculer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        btnReturn.setOnClickListener(v -> {
+            finish();
+        });
+        btCalculer.setOnClickListener(v -> {
+            calcul();
+        });
+
+        btAnnuler.setOnClickListener(v -> {
+            effacer();
+        });
+
+        editN.setOnEditorActionListener((v, actionId, event) -> {
+            if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
                 calcul();
             }
-        });
-
-        btAnnuler.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                effacer();
-            }
-        });
-
-        editN.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
-                    calcul();
-                }
-                return false;
-            }
+            return false;
         });
     }
 
@@ -60,9 +56,9 @@ public class CalculActivity extends AppCompatActivity {
     //        txtResultat.setText("Veuillez svp definir une valeur");
             return;
         }
-        int a = Integer.parseInt(editA.getText().toString());
-        int n = Integer.parseInt(editN.getText().toString());
-        Integer resultat = calcPuissance(a, n);
+        Long a = Long.valueOf(editA.getText().toString());
+        Long n = Long.valueOf(editN.getText().toString());
+        Long resultat = calcPuissance(a, n);
 
         System.out.println(resultat.toString());
         txtResultat.setText(resultat.toString());
@@ -70,8 +66,8 @@ public class CalculActivity extends AppCompatActivity {
         editA.setSelected(true);
     }
 
-    private int calcPuissance(int a, int n) {
-        int result = 1;
+    private Long calcPuissance(Long a, Long n) {
+        Long result = 1L;
         for (int i = 1; i <= n; i++) {
             result = result * a;
         }
