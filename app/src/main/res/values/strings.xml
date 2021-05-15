@@ -115,7 +115,29 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
-    <string name="coming_text">Coming...</string>
+    <string name="coming_text">Coming soon…</string>
     <string name="label_puissance">Puissance</string>
     <string name="label_retour">&#60; Retour</string>
+    <string name="label_matiere">Matière</string>
+    <string name="matiere_identifiant">Identifiant</string>
+    <string name="matiere_libelle">Libelle</string>
+    <string name="label_facultatif">Facultative</string>
+    <string name="label_obligatoire">Obligatoire</string>
+    <string name="label_type_matiere">Type</string>
+    <string name="label_enseignant">Enseignant</string>
+    <string name="label_image">Image</string>
+    <string name="label_enregistrer">Enregistrer</string>
+    <string name="label_effacer">Effacer</string>
+    <string name="label_rechercher">Rechercher</string>
+    <string-array name="enseignants_names">
+        <item>Amevor</item>
+        <item>Eklou</item>
+        <item>Gbodui</item>
+    </string-array>
+    <string-array name="images_names">
+        <item>Informatique</item>
+        <item>Maths</item>
+        <item>Physique</item>
+        <item>SVT</item>
+    </string-array>
 </resources>

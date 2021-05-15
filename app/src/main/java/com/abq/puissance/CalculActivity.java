@@ -4,12 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.abq.puissance.models.Matiere;
 
 public class CalculActivity extends AppCompatActivity {
     Button btCalculer;
@@ -29,6 +32,8 @@ public class CalculActivity extends AppCompatActivity {
         editA = findViewById(R.id.nombre_a);
         editN = findViewById(R.id.nombre_n);
         txtResultat = findViewById(R.id.nombre_apn);
+
+//        setEditExtras();
 
         btnReturn.setOnClickListener(v -> {
             finish();
@@ -67,7 +72,7 @@ public class CalculActivity extends AppCompatActivity {
     }
 
     private Long calcPuissance(Long a, Long n) {
-        Long result = 1L;
+        long result = 1L;
         for (int i = 1; i <= n; i++) {
             result = result * a;
         }
@@ -79,5 +84,16 @@ public class CalculActivity extends AppCompatActivity {
         editA.setText("");
         editN.setText("");
         txtResultat.setText("RESULTAT");
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void setEditExtras() {
+        Bundle extras = getIntent().getExtras();
+        long a = getIntent().getExtras().getLong("a");
+        Matiere matiere = getIntent().getExtras().getParcelable("com.abq.puissance.models.Matiere");
+        editA.setText(String.valueOf(matiere.getId()));
+        Log.i("id_matiere", String.valueOf(matiere.getId()));
+        editN.setText(String.valueOf(matiere.getLibelle()));
+        Log.i("id_matiere", String.valueOf(matiere.getLibelle()));
     }
 }

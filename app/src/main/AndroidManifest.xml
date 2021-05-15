@@ -9,6 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Football">
+        <activity android:name=".MatiereDetailsActivity"></activity>
+        <activity android:name=".MatiereFormActivity" />
         <activity
             android:name=".LandingActivity"
             android:label="@string/title_activity_landing"
