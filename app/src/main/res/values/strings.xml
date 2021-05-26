@@ -129,6 +129,7 @@
     <string name="label_enregistrer">Enregistrer</string>
     <string name="label_effacer">Effacer</string>
     <string name="label_rechercher">Rechercher</string>
+    <string name="label_menu">Menu</string>
     <string-array name="enseignants_names">
         <item>Amevor</item>
         <item>Eklou</item>
