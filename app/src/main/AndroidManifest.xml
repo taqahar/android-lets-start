@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Football">
-        <activity android:name=".MatiereDetailsActivity"></activity>
+        <activity android:name=".MatiereDetailsActivity"/>
         <activity android:name=".MatiereFormActivity" />
         <activity
             android:name=".LandingActivity"
@@ -27,6 +27,18 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.ALTERNATIVE" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MatiereListItem"
+            android:label="@string/app_name">
+        </activity>
+        <activity
+            android:name=".MatiereList"
+            android:label="Matiere Liste">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.ALTERNATIVE" />
             </intent-filter>
         </activity>

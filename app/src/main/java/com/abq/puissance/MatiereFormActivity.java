@@ -4,7 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,14 +13,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.abq.puissance.models.DBHelper;
 import com.abq.puissance.models.Matiere;
+import com.abq.puissance.models.MatiereRepository;
 import com.abq.puissance.models.MesMatieres;
-import com.google.android.material.snackbar.Snackbar;
 
 public class MatiereFormActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -35,11 +36,15 @@ public class MatiereFormActivity extends AppCompatActivity implements AdapterVie
     Button btn_enregistrer;
     Button btn_effacer;
     Button btn_rechercher;
+    Button btn_toListMatieres;
+    DBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_matiere_form);
+
+        dbHelper = new DBHelper(this);
 
         initViews();
         adaptSpinners();
@@ -56,6 +61,7 @@ public class MatiereFormActivity extends AppCompatActivity implements AdapterVie
         btn_enregistrer = findViewById(R.id.btn_enregistrer);
         btn_effacer = findViewById(R.id.btn_effacer);
         btn_rechercher = findViewById(R.id.btn_rechercher);
+        btn_toListMatieres = findViewById(R.id.btn_liste_matieres);
     }
 
     private void adaptSpinners() {
@@ -73,6 +79,7 @@ public class MatiereFormActivity extends AppCompatActivity implements AdapterVie
         super.onStart();
         enseignantValue = enseignant_spinner.getSelectedItem().toString();
         imageValue = image_spinner.getSelectedItem().toString();
+        loadFromDB();
     }
 
     private void initEvents() {
@@ -80,7 +87,7 @@ public class MatiereFormActivity extends AppCompatActivity implements AdapterVie
         image_spinner.setOnItemSelectedListener(this);
         btn_enregistrer.setOnClickListener(v -> {
 //            TODO: faire les controles
-            enregistrer();
+            enregistrer(true);
         });
 
         btn_effacer.setOnClickListener(v -> {
@@ -89,6 +96,10 @@ public class MatiereFormActivity extends AppCompatActivity implements AdapterVie
 
         btn_rechercher.setOnClickListener(v -> {
             rechercher(Integer.parseInt(id.getText().toString()));
+        });
+
+        btn_toListMatieres.setOnClickListener(v -> {
+            afficherListe();
         });
 
     }
@@ -100,51 +111,76 @@ public class MatiereFormActivity extends AppCompatActivity implements AdapterVie
         switch (view.getId()) {
             case R.id.radio_facultatif:
                 if (checked)
-                    type = false;
+                    type = true;
                 break;
             case R.id.radio_obligatoire:
                 if (checked)
-                    type = true;
+                    type = false;
                 break;
             default:
                 break;
         }
     }
 
-    private void enregistrer() {
+
+    private void enregistrer(boolean isDB) {
         Matiere matiere = new Matiere();
         matiere.setId(Integer.parseInt(id.getText().toString()));
         matiere.setLibelle(libelle.getText().toString());
-        matiere.setType(type);
+        matiere.setFacultatif(type);
         matiere.setEnseigant(enseignantValue);
-        matiere.setImage("@drawable/" + imageValue);
+        matiere.setImageName("@drawable/" + imageValue);
 
         Log.i("LOGQ", "id: " + matiere.getId() + "\n"
                 + " libelle:" + matiere.getLibelle() + "\n"
-                + " type:" + matiere.isType() + "\n"
+                + " type:" + matiere.isFacultatif() + "\n"
                 + " enseignant:" + matiere.getEnseigant() + "\n"
-                + " image:" + matiere.getImage() + "\n"
+                + " image:" + matiere.getImageName() + "\n"
         );
 
+        if (isDB) {
+            MatiereRepository matiereRepository = new MatiereRepository();
+            Log.i("SAVING MATIERE", "" + matiereRepository.save(dbHelper.getDatabase(), matiere));
+        }
+
         MesMatieres.listMatieres.add(matiere);
+
+        Toast.makeText(this,"Matiere enregistrée", Toast.LENGTH_SHORT).show();
     }
+
+    private void loadFromDB() {
+        MatiereRepository matiereRepository = new MatiereRepository();
+        MesMatieres.listMatieres.addAll(matiereRepository.findAll(dbHelper.getDatabase()));
+    }
+
     private void effacer() {
         id.setText("");
         libelle.setText("");
         facultatif.toggle();
         enseignant_spinner.setSelection(0);
         image_spinner.setSelection(0);
+        Toast.makeText(this,"Effacé", Toast.LENGTH_SHORT).show();
     }
 
     private void rechercher(int id) {
+        boolean wasFound = false;
         for (Matiere matiere : MesMatieres.listMatieres) {
             if (matiere.getId() == id) {
-                Log.e("xxxxxxxxxx", matiere.getId() + " " + matiere.getLibelle() + " " + matiere.isType() + " " + matiere.getEnseigant() + " " + matiere.getImage());
+                wasFound = true;
+                Log.e("xxxxxxxxxx", matiere.getId() + " " + matiere.getLibelle() + " " + matiere.isFacultatif() + " " + matiere.getEnseigant() + " " + matiere.getImageName());
                 Intent details_matiere = new Intent(this, MatiereDetailsActivity.class);
                 details_matiere.putExtra("com.abq.puissance.models.Matiere", matiere);
                 startActivity(details_matiere);
             }
         }
+        if (!wasFound) {
+            Toast.makeText(this,"Matiere non trouvée", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void afficherListe() {
+        Intent listePage = new Intent(this, MatiereList.class);
+        startActivity(listePage);
     }
 
     @SuppressLint("NonConstantResourceId")

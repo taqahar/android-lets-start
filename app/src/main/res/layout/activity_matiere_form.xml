@@ -152,10 +152,18 @@
 
             <Button
                 android:id="@+id/btn_enregistrer"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="4dp"
                 android:text="@string/label_enregistrer"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/btn_effacer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:text="@string/label_effacer"
                 android:textSize="16sp" />
 
         </LinearLayout>
@@ -168,15 +176,6 @@
         android:padding="10dp">
 
         <Button
-            android:id="@+id/btn_effacer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="4dp"
-            android:text="@string/label_effacer"
-            android:textSize="16sp"
-            style="?android:attr/buttonBarButtonStyle"/>
-
-        <Button
             android:id="@+id/btn_rechercher"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -184,6 +183,16 @@
             android:text="@string/label_rechercher"
             android:textSize="16sp"
             style="?android:attr/buttonBarButtonStyle" />
+
+        <Button
+            android:id="@+id/btn_liste_matieres"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="4dp"
+            android:text="@string/liste_des_matieres"
+            android:textSize="16sp"
+            style="?android:attr/buttonBarButtonStyle"/>
+
     </LinearLayout>
 
     </LinearLayout>

@@ -4,9 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.Bundle;
-import android.util.Log;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,6 +15,7 @@ public class MatiereDetailsActivity extends AppCompatActivity {
 
     TextView info;
     ImageView img;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,15 +33,16 @@ public class MatiereDetailsActivity extends AppCompatActivity {
 
         info.setText("id: " + matiere.getId() + "\n"
                 + " libelle:" + matiere.getLibelle() + "\n"
-                + " type:" + (matiere.isType() ? "obligatoire" : "facultatif") + "\n"
+                + " type:" + (matiere.isFacultatif() ? "obligatoire" : "facultatif") + "\n"
                 + " enseignant:" + matiere.getEnseigant() + "\n"
         );
 
-        String uri = matiere.getImage().toLowerCase();
+        String uri = matiere.getImageName();
 
         int imageResource = getResources().getIdentifier(uri, null, getPackageName());
-
         Drawable res = getResources().getDrawable(imageResource);
         img.setImageDrawable(res);
+
+//        img.setImageDrawable(getResources().getDrawable(getResources().getIdentifier(uri, null, getPackageName())));
     }
 }

@@ -32,6 +32,7 @@ public class LandingActivity extends AppCompatActivity {
     private Button btn_matiere;
     private Button btn_menu;
     private Button btn_comming;
+
     private final static int MENU_AJOUTER = Menu.FIRST;
     private final static int MENU_SUPPRIMER = Menu.FIRST + 1;
 
@@ -43,27 +44,11 @@ public class LandingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityLandingBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-
-        Toolbar toolbar = binding.toolbar;
-        setSupportActionBar(toolbar);
-
-        btn_puissance = findViewById(R.id.btn_puissance);
-        btn_matiere = findViewById(R.id.btn_matiere);
-        btn_comming = findViewById(R.id.btn_comming);
-        btn_menu = findViewById(R.id.btn_menu);
-        editSharedPrefs = findViewById(R.id.edit_shared_prefs);
-        btnSharedPrefs = findViewById(R.id.btn_shared_prefs);
+        initViews();
 
         registerForContextMenu(btn_menu);
 
-        setTitle("DevMobileApp");
-        CollapsingToolbarLayout toolBarLayout = binding.toolbarLayout;
-        toolBarLayout.setTitle(getTitle());
-
 //        FloatingActionButton fab = binding.fab;
-
 
         btn_puissance.setOnClickListener(v -> {
             toPuissance();
@@ -83,6 +68,25 @@ public class LandingActivity extends AppCompatActivity {
         btnSharedPrefs.setOnClickListener(v -> {
             saveMesPrefs();
         });
+    }
+
+    private void initViews() {
+        binding = ActivityLandingBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        Toolbar toolbar = binding.toolbar;
+        setSupportActionBar(toolbar);
+
+        btn_puissance = findViewById(R.id.btn_puissance);
+        btn_matiere = findViewById(R.id.btn_matiere);
+        btn_comming = findViewById(R.id.btn_comming);
+        btn_menu = findViewById(R.id.btn_menu);
+        editSharedPrefs = findViewById(R.id.edit_shared_prefs);
+        btnSharedPrefs = findViewById(R.id.btn_shared_prefs);
+
+        setTitle("DevMobileApp");
+        CollapsingToolbarLayout toolBarLayout = binding.toolbarLayout;
+        toolBarLayout.setTitle(getTitle());
     }
 
     private void toPuissance() {

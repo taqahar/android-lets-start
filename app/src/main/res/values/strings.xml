@@ -130,6 +130,7 @@
     <string name="label_effacer">Effacer</string>
     <string name="label_rechercher">Rechercher</string>
     <string name="label_menu">Menu</string>
+    <string name="liste_des_matieres">Liste des Matieres</string>
     <string-array name="enseignants_names">
         <item>Amevor</item>
         <item>Eklou</item>
